@@ -15,10 +15,9 @@ int main(int argc, string argv[])
     int secret;
 
     // checking against the user for an input
-    if (argc!= 2 || atoi(argv[1]) <= 0)
+    if (argc!= 2 || atoi(argv[1]) < 0)
     {
         printf("Put in a command line argument!\n");
-        //printf("Usage: %s k/n", argv[0]);
         return 1;
     }
 
@@ -34,12 +33,14 @@ int alphaIndex(string text, int key)
 {
     for(int i = 0; i < strlen(text); i++)
     {
-        if(isalpha(text[i]) && islower(text[i]))  // lowercase instance
+        // for lowercase letters
+        if(islower(text[i]))
         {
             printf("%c", (((text[i] - 97) + key) % 26) + 97);  // ASCII for lower is 97 (a)
         }
 
-        else if(isalpha(text[i]) && isupper(text[i]))  // uppercase instance
+        // for uppercase letters
+        else if(isupper(text[i]))
         {
             printf("%c", (((text[i] - 65) + key) % 26) + 65);  // ASCII for upper is 65 (a)
         }
@@ -49,7 +50,7 @@ int alphaIndex(string text, int key)
             printf("%c", text[i]);   // not letters or numers (symbols)
         }
     }
-
+    printf("\n");
     return 0;
 }
 
