@@ -2,41 +2,54 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdlib.h>
 
-// {
-//     string s = get_string("First Name: ");
-//     for(int i = 0; i < strlen(s); i++)
-//     {
-//         //makes the ASCII codes for a string
-//         printf("%c %i\n", s[i], (int) s[i]);
-//     }
-// }
+// function declaration
+int alphaIndex(string, int);
 
-
- int main(int argc, char* argv[])
+// user-side
+int main(int argc, string argv[])
 {
-    int i;
-    int key = atoi(argv[1]);
-    int result;
-    char str[60];
+    // declaring two integers
+    int key;
+    int secret;
 
-for (i = 0; i < argc; i++)
-{
-    printf("argv[%d] = %s\n", i, argv[i]);
-}
-
- if (argc != 2)
+    // checking against the user for an input
+    if (argc!= 2 || atoi(argv[1]) <= 0)
     {
-        printf("You need to enter a key\n");
+        printf("Put in a command line argument!\n");
+        //printf("Usage: %s k/n", argv[0]);
         return 1;
     }
- else
-    {
 
-        if (key == 0)
+    //change the key to an int
+    key = atoi(argv[1]);
+    string message = get_string("message: ");
+    printf("secret: "); //prints the secret message after applying a key of your choosing
+    secret = alphaIndex(message, key);
+}
+
+// program-side
+int alphaIndex(string text, int key)
+{
+    for(int i = 0; i < strlen(text); i++)
+    {
+        if(isalpha(text[i]) && islower(text[i]))  // lowercase instance
         {
-            printf("Wrong key!.\n");
-            return 1;
+            printf("%c", (((text[i] - 97) + key) % 26) + 97);  // ASCII for lower is 97 (a)
+        }
+
+        else if(isalpha(text[i]) && isupper(text[i]))  // uppercase instance
+        {
+            printf("%c", (((text[i] - 65) + key) % 26) + 65);  // ASCII for upper is 65 (a)
+        }
+
+        else
+        {
+            printf("%c", text[i]);   // not letters or numers (symbols)
         }
     }
+
+    return 0;
 }
+
