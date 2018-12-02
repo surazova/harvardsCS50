@@ -5,7 +5,7 @@
 #include <stdlib.h>
 
 // function declaration
-int alphaIndex(string, int);
+int cipherText(string, int);
 
 // user-side
 int main(int argc, string argv[])
@@ -25,11 +25,11 @@ int main(int argc, string argv[])
     key = atoi(argv[1]);
     string message = get_string("message: ");
     printf("secret: "); //prints the secret message after applying a key of your choosing
-    secret = alphaIndex(message, key);
+    secret = cipherText(message, key);
 }
 
 // program-side
-int alphaIndex(string text, int key)
+int cipherText(string text, int key)
 {
     for(int i = 0; i < strlen(text); i++)
     {
