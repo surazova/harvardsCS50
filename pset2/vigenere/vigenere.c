@@ -4,50 +4,65 @@
 #include <ctype.h>
 #include <stdlib.h>
 
-
-
 int main(int argc, string argv[])
 {
-    if(argc != 2)
+    // declare three variables, all equal to 0
+    int j;
+    int k;
+    int l = 0;
+
+    // check against user for one command line argument
+    if (argc != 2)
     {
-        printf("Usage: ./vigenere k\n");
+        printf("Try Again\n");
         return 1;
     }
 
-    string key = (argv[1]);
-    int keyLength = strlen(key);
-    int keyCode = 0;
-    for (int j = 0; j < keyLength; j++)
-    if (!isalpha(key[j]))
+    string s = (argv[1]);
+    // Make sure command line argument is alpha
+    // isalpha() takes a single argument in the form of an integer and returns an integer value
+    for (int i = 0; i < strlen(s); i++)
     {
-        printf("Keys may only use letters. Use an acceptable key value, \n");
-        return 1;
-    }
-
-    // Encryption
-    string p = get_string("plaintext: ");
-
-    printf("ciphertext: ");
-        for(int i = 0, length = strlen(p); i < length; i++)
+        if (isalpha(s[i]) == false)
         {
-            if (islower(p[i]))
-            {
-                printf("%c", (p[i] - 'a' + tolower(key[keyCode]) - 'a') % 26 + 'a');
-                keyCode = (keyCode + 1) % keyLength;
-            }
+            printf("Try that again\n");
+            return 1;
+        }
+    }
 
-            else if (isupper(p[i]))
+    // Get user input string
+    string plainText = get_string("plaintext: ");
 
-            {
-               printf("%c", (p[i] - 'A' + toupper(key[keyCode]) - 'A') % 26 + 'A');
-                keyCode = (keyCode + 1) % keyLength;
-            }
-            else
-            {
-                printf("%c", p[i]);
-            }
+    // Printing the cypher text
+    printf("ciphertext: ");
+
+    for (int i = 0; i < strlen(plainText); i++)
+    {
+        // Encrypting lower case
+        if islower(plainText[i])
+        {
+            j = (l % strlen(s));
+            k = (tolower(s[j]) - 97);
+            printf("%c", (((plainText[i] + k) - 97) % 26) + 97);
+            l += 1;
         }
 
-        printf("\n");
-        return 0;
+        // Encrypting upper case
+        if isupper(plainText[i])
+        {
+            j = (l % strlen(s));
+            k = (tolower(s[j]) - 97);
+            printf("%c", (((plainText[i] + k) - 65) % 26) + 65);
+            l += 1;
+        }
+
+        // other print
+        else
+        {
+            printf("%c", plainText[i]);
+        }
+    }
+
+    printf("\n");
+    return 0;
 }
