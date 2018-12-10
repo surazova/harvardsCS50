@@ -34,7 +34,7 @@ int frequency(string note)
 {
     // Switch operator is much faster for multi-way branching
     int octave = note[strlen(note) - 1];
-    octave -= 48;  // ASCII value
+    octave -= 48;  // ASCII value representing 0
 
     double freq = 0.0;
 
