@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     }
 
     // read infile's BITMAPFILEHEADER
+    // functions as a pointer
     BITMAPFILEHEADER bf;
     fread(&bf, sizeof(BITMAPFILEHEADER), 1, inptr);
 
@@ -73,6 +74,28 @@ int main(int argc, char *argv[])
 
             // read RGB triple from infile
             fread(&triple, sizeof(RGBTRIPLE), 1, inptr);
+
+            // Adding code to read/change specific colors below
+            // If RGBTRIPLE is red, change it to white
+            if (triple.rgbtRed == 0xff && triple.rgbtBlue == 0x00 && triple.rgbtGreen == 0x00)
+            // 0xff masks the variable so it leaves only the value in the last 8 bits, and ignores all the rest of the bits.
+            // it also changes the color values from a special format to standard RGB values (which are 8 bits long)
+            // 0X: means hexadecimal (like #)
+            // 0xff is white
+
+            {
+                triple.rgbtBlue = 0xff;
+                triple.rgbtGreen = 0xff;
+            }
+
+            // If RGBTRIPLE is white, change it to black
+            // 0x00 is black
+            if (triple.rgbtBlue == 0xff && triple.rgbtRed == 0xff && triple.rgbtGreen == 0xff)
+            {
+                triple.rgbtBlue = 0x00;
+                triple.rgbtGreen = 0x00;
+                triple.rgbtRed = 0x00;
+            }
 
             // write RGB triple to outfile
             fwrite(&triple, sizeof(RGBTRIPLE), 1, outptr);
