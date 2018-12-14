@@ -5,8 +5,8 @@
 int main(int argc, char *argv[])
 {
 // ensure proper usage
-// 4 due to padding (needs to be a mutliple of 4)
-    if (argc != 4)
+// 4?
+    if (argc != 3)
     {
         fprintf(stderr, "Usage: copy infile outfile\n");
         return 1;
