@@ -7,6 +7,11 @@ int maiin(int argc, cahr *argv[])
 {
     // check for only 1 command line argument
     //FILE *file = fopen(argv[1], "r");
+    if (argc != 2)
+    {
+        fprintf(stderr, "Please enter file name.\n");
+        return 1;
+    }
 }
 
 
