@@ -12,6 +12,15 @@ int maiin(int argc, cahr *argv[])
         fprintf(stderr, "Please enter file name.\n");
         return 1;
     }
+    //Open the file entered into the command line
+FILE *file = fopen(argv[1], "r");
+//If the file does not exist, throw an error
+if (file == NULL)
+{
+fprintf(stderr, "Could not open %s.\n", argv[1]);
+return 1;
+}
+
 }
 
 
