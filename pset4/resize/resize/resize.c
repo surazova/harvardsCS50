@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
 // ensure proper usage
 // 4?
-    if (argc != 3)
+    if (argc != 4)
     {
         fprintf(stderr, "Usage: copy infile outfile\n");
         return 1;
