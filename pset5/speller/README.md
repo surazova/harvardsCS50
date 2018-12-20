@@ -2,7 +2,7 @@
 
 ## What is pneumonoultramicroscopicsilicovolcanoconiosis?
 
-TODO
+a disease of the lungs resulting from the inhalation of very fine silicate or quartz dust' 'Pneumonoultramicroscopicsilicavolcanoconiosis is a form of the illness pneumoconiosis, caused by the inhalation of a fine silica dust found in most volcanoes.'
 
 ## According to its man page, what does `getrusage` do?
 
