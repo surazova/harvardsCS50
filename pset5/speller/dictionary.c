@@ -1,4 +1,5 @@
 // Implements a dictionary's functionality
+// Main functionality added here
 
 #include <stdbool.h>
 
