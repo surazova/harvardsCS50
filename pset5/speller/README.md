@@ -2,19 +2,19 @@
 
 ## What is pneumonoultramicroscopicsilicovolcanoconiosis?
 
-a disease of the lungs resulting from the inhalation of very fine silicate or quartz dust' 'Pneumonoultramicroscopicsilicavolcanoconiosis is a form of the illness pneumoconiosis, caused by the inhalation of a fine silica dust found in most volcanoes.'
+A disease of the lungs resulting from the inhalation of very fine silicate or quartz dust' 'Pneumonoultramicroscopicsilicavolcanoconiosis is a form of the illness pneumoconiosis, caused by the inhalation of a fine silica dust found in most volcanoes.'
 
 ## According to its man page, what does `getrusage` do?
 
-TODO
+Get resource usage
 
 ## Per that same man page, how many members are in a variable of type `struct rusage`?
 
-TODO
+16 members
 
 ## Why do you think we pass `before` and `after` by reference (instead of by value) to `calculate`, even though we're not changing their contents?
 
-TODO
+Not using before and after will make the program slower and will take up a lot of memory.
 
 ## Explain as precisely as possible, in a paragraph or more, how `main` goes about reading words from a file. In other words, convince us that you indeed understand how that function's `for` loop works.
 

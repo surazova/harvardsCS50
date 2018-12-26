@@ -1,5 +1,10 @@
 // Implements a dictionary's functionality
 // Main functionality added here
+// TODO:
+// Load: Loading the dictionary file (a text file that contians words and is a reference where the certain )
+// Spelling: Is correct if the word is in the dictionary
+// Unload: unloads or frees the memory and the dictionary that was allocated to being used to store the words from the dictionary
+// Size: Checks the number of words on the dictionary file
 
 #include <stdbool.h>
 
