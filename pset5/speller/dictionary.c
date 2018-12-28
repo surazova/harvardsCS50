@@ -74,6 +74,9 @@ bool check(const char *word)
     return false;
 }
 
+
+                    // TODO: LOAD
+
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
