@@ -80,7 +80,17 @@ bool check(const char *word)
 // Loads dictionary into memory, returning true if successful else false
 bool load(const char *dictionary)
 {
-    // TODO
+    // Open dictionary to read only
+    FILE* file = fopen(dictionary, "r");
+
+    // If the dictionary is empty
+    if (file == NULL)
+    {
+        fprint(stderr, "Could not open file %s. \n", dictionary);
+        return false;
+    }
+
+
     return false;
 }
 
