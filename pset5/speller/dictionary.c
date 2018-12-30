@@ -90,7 +90,18 @@ bool load(const char *dictionary)
         return false;
     }
 
+    // Set buffer to store an output word
+    char buffer[LENGTH + 1];
 
+    int n = LENGTH + 2;
+
+    // loop through the dictionary until a null character
+    while (fgets(buffer, n, file) != NULL)
+    {
+
+        // add null terminator to the end of the word
+
+    }
     return false;
 }
 
