@@ -100,6 +100,14 @@ bool load(const char *dictionary)
     {
 
         // add null terminator to the end of the word
+        buffer[strlen(buffer) - 1] ='\0';
+
+        //hash the word
+        int index = hash(buffer) % HASHTABLE_SIZE;
+
+        // Create a temporay node
+        node* temp = malloc(sizeof(node));
+
 
     }
     return false;
