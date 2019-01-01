@@ -108,7 +108,12 @@ bool load(const char *dictionary)
         // Create a temporay node
         node* temp = malloc(sizeof(node));
 
-
+        // Test to see if node is null
+        if (temp == NULL)
+        {
+            fclose(file);
+            return false;
+        }
     }
     return false;
 }
