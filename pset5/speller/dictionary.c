@@ -114,6 +114,10 @@ bool load(const char *dictionary)
             fclose(file);
             return false;
         }
+
+        //Move to the enxt node in the list
+        strcpy(temp -> word, buffer);
+        temp -> next = hastable[index];
     }
     return false;
 }
