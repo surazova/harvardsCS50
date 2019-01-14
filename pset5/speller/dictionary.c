@@ -95,7 +95,7 @@ int trieAdd(struct trie_node *node, const char *word, char *description)
 char *trie_get(struct trie_node *node, const char *word)
 {
     int i;
-    for (i = 0; i < strlen(word); i++
+    for (i = 0; i < strlen(word)); i++
     {
         int letter = letterInt(word[i]);
         if (letter == -1)
@@ -168,7 +168,7 @@ int dictionaryLook(const char *word, char *definition)
     }
 
     // take the string description/definition from trie table
-    char *description = trie_get(&tree.root, word;
+    char *description = trie_get(&tree.root, word);
 
     if (!description)
     {
