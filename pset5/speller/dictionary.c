@@ -4,11 +4,11 @@
 // Spelling: Is correct if the word is in the dictionary
 // Unload: unloads or frees the memory and the dictionary that was allocated to being used to store the words from the dictionary
 // Size: Checks the number of words on the dictionary file
-#include <stdbool.h>
+//#include <stdbool.h>
 #include <stdio.h>
-#include <cs50.h>
 #include <string.h>
-#include <ctype.h>
+//#include <ctype.h>
+#include <stdlib.h>
 
 #include "dictionary.h"
 
@@ -40,13 +40,13 @@ int letterInt(char letter)
     }
     else if (letter >= 'a' && letter <= 'z')
     {
-        return letter - 'a' // 0-25
+        return letter - 'a'; // 0-25
     }
     return -1; // keep going
 }
 
 // Defines an invalid character within a word (based on its index)
-void wrongWord(const char *word, int index)
+void printInvalid(const char *word, int index)
 {
     printf(" the word: \"%s\"\n", word);
     printf("    ");
@@ -69,8 +69,8 @@ int trieAdd(struct trie_node *node, const char *word, char *description)
         {
             // If the character in the string is invalid
             printf("The word was not inserted into the trie because it was invalid \n");
-            wrongWord(word, i);
-            printf(" description: \"s\"\n", description);
+            printInvalid(word, i);
+            printf(" description: \"%s\"\n", description);
             return false;
         }
         // Setting up Trie table (node is parent, letter is children)
@@ -87,7 +87,7 @@ int trieAdd(struct trie_node *node, const char *word, char *description)
     // Allocating memory to each character, not word (saves memory)
     int len = strlen(description);
     node->value = malloc(len +1);
-    strncopy(node->value, description, len);
+    strncpy(node->value, description, len);
     return true;
 }
 
@@ -95,7 +95,7 @@ int trieAdd(struct trie_node *node, const char *word, char *description)
 char *trie_get(struct trie_node *node, const char *word)
 {
     int i;
-    for (i = 0; i < strlen(word)); i++
+    for (i = 0; i < strlen(word); i++)
     {
         int letter = letterInt(word[i]);
         if (letter == -1)
@@ -124,7 +124,7 @@ int dictionaryRead(const char * filename)
 
     if(!file)
     {
-        printf("could not find or open the file! \"%s"\n", filename);
+        printf("could not find or open the file! \"%s\"\n", filename);
         return false;
     }
 
@@ -134,9 +134,9 @@ int dictionaryRead(const char * filename)
     int count = 0;
 
     // word and descriton are parsed
-    while (fscan(file, "%s %[^\n]", word, desc) > 1)
+    while (fscanf(file, "%s %[^\n]", word, desc) > 1)
     {
-        if (!trie_insert(&tree.root, word, desc))
+        if (!trieAdd(&tree.root, word, desc))
         {
             fclose(file);
             return false;
@@ -173,11 +173,10 @@ int dictionaryLook(const char *word, char *definition)
     if (!description)
     {
         return false;
-
     }
 
     // Copy the definition
-    strcopy(definition, description);
+    strcpy(definition, description);
 
     return true;
 }
