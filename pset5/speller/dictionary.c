@@ -112,125 +112,72 @@ char *trie_get(struct trie_node *node, const char *word)
     return node->value;
 }
 
-
-// Create a pointer for a linked list
-typedef struct node
+void dictionaryInit()
 {
-    char word[LENGTH + 1];
-    struct node* next;
-}
-    node;
-
-// Hash prototype
-usingned long hash(char *str);
-
-// Set the pointer to the hash table
-node *hashtable[HASHTABLE_SIZE];
-
-// Counter for the words in size
-int word_count = 0;
-
-
-// Returns true if word is in dictionary else false
-bool check(const char *word)
-{
-    // Change the word to lowercase
-    int in = strlen(word);
-    char copy[n + 1];
-
-    // Add null
-    copy[n] = '\0';
-
-    for(int i = 0; i < n; i++)
-    {
-        copy[i] = tolower(word[i]);
-    }
-
-    // Obtain index of word
-    int index = hash(copy) % HASHTABLE_SIZE;
-
-    // Head of the linked list
-    node* head = hashtable[index];
-
-    if(head != NULL)
-    {
-        // Cursor
-        node* cursor = head;
-
-        // Use the linked list
-        while(cursoe !=NULL)
-        {
-            if(strcmp(copy, cursor->word) == 0)
-            {
-                //Return true if the word matches in dictionary
-                return true;
-            }
-
-            // If not matching, move the cursor to the next linked list
-            cursor = cursor->next;
-        }
-    }
-    return false;
+    tree = (struct trie) {}; // erases the tree
 }
 
-
-                    // TODO: LOAD
-
-// Loads dictionary into memory, returning true if successful else false
-bool load(const char *dictionary)
+int dictionaryRead(const char * filename)
 {
-    // Open dictionary to read only
-    FILE* file = fopen(dictionary, "r");
+    // Opens the file
+    FILE *file = fopen(filename, "r");
 
-    // If the dictionary is empty
-    if (file == NULL)
+    if(!file)
     {
-        fprint(stderr, "Could not open file %s. \n", dictionary);
+        printf("could not find or open the file! \"%s"\n", filename);
         return false;
     }
 
-    // Set buffer to store an output word
-    char buffer[LENGTH + 1];
+    char word[MAX_WORD_SIZE];
+    char desc[MAX_DESC_SIZE];
 
-    int n = LENGTH + 2;
+    int count = 0;
 
-    // loop through the dictionary until a null character
-    while (fgets(buffer, n, file) != NULL)
+    // word and descriton are parsed
+    while (fscan(file, "%s %[^\n]", word, desc) > 1)
     {
-
-        // add null terminator to the end of the word
-        buffer[strlen(buffer) - 1] ='\0';
-
-        //hash the word
-        int index = hash(buffer) % HASHTABLE_SIZE;
-
-        // Create a temporay node
-        node* temp = malloc(sizeof(node));
-
-        // Test to see if node is null
-        if (temp == NULL)
+        if (!trie_insert(&tree.root, word, desc))
         {
             fclose(file);
             return false;
+
         }
-
-        //Move to the enxt node in the list
-        strcpy(temp -> word, buffer);
-        temp -> next = hastable[index];
+        else
+        {
+            count++;
+        }
     }
-    return false;
+    fclose(file);
+    printf("parsed file \"%s\" with %i entries\n", filename, count);
+    return true;
 }
 
-// Returns number of words in dictionary if loaded else 0 if not yet loaded
-unsigned int size(void)
+int dictionaryLook(const char *word, char *definition)
 {
-    // TODO
-    return 0;
-}
+    // Check for invalid letters
+    int i;
+    for(i = 0; i < strlen(word); i++)
+    {
+        int letter = letterInt(word[i]);
+        if(letter == -1)
+        {
+            printf("Invalid spelling!\n");
+            printInvalid(word, i);
+            return false;
+        }
+    }
 
-// Unloads dictionary from memory, returning true if successful else false
-bool unload(void)
-{
-    // TODO
-    return false;
+    // take the string description/definition from trie table
+    char *description = trie_get(&tree.root, word;
+
+    if (!description)
+    {
+        return false;
+
+    }
+
+    // Copy the definition
+    strcopy(definition, description);
+
+    return true;
 }

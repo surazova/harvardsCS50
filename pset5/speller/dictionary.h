@@ -26,10 +26,10 @@
 #define MAX_WORD_SIZE   40
 #define MAX_DESC_SIZE  200
 
-void dictionary_initialise();
+void dictionaryInit();
 
-int dictionary_read_from_file(const char * filename);
+int dictionaryRead(const char * filename);
 
-int dictionary_lookup(const char * word, char * meaning);
+int dictionaryLook(const char * word, char * meaning);
 
 #endif
