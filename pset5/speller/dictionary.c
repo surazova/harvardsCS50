@@ -1,182 +1,422 @@
-// Implements a dictionary's functionality
-// Main functionality added here
-// Load: Loading the dictionary file (a text file that contians words and is a reference where the certain )
-// Spelling: Is correct if the word is in the dictionary
-// Unload: unloads or frees the memory and the dictionary that was allocated to being used to store the words from the dictionary
-// Size: Checks the number of words on the dictionary file
-//#include <stdbool.h>
+// // Implements a dictionary's functionality
+// // Main functionality added here
+// // Load: Loading the dictionary file (a text file that contians words and is a reference where the certain )
+// // Spelling: Is correct if the word is in the dictionary
+// // Unload: unloads or frees the memory and the dictionary that was allocated to being used to store the words from the dictionary
+// // Size: Checks the number of words on the dictionary file
+// //#include <stdbool.h>
+// #include <stdio.h>
+// #include <string.h>
+// //#include <ctype.h>
+// #include <stdlib.h>
+
+// #include "dictionary.h"
+
+// #define ALPHABET_SIZE 26 //26 lowercase and 26 uppercase letters
+
+// // Parameters
+// #define false 0
+// #define true 1
+
+// struct trie tree;
+
+// struct trie_node
+// {
+//     char *value;
+//     struct trie_node *children[ALPHABET_SIZE * 2]; // 2= 1 set of 26 uppercase, 1 set of 26 lowercase
+// };
+
+// struct trie
+// {
+//     struct trie_node root;
+// };
+
+// // Change a character to an integer (a-z =  0 - 25 || A-Z = 26 - 51)
+// int letterInt(char letter)
+// {
+//     if (letter >= 'A' && letter <= 'Z')
+//     {
+//         return letter - 'A' + 26;  // 26-51
+//     }
+//     else if (letter >= 'a' && letter <= 'z')
+//     {
+//         return letter - 'a'; // 0-25
+//     }
+//     return -1; // keep going
+// }
+
+// // Defines an invalid character within a word (based on its index)
+// void printInvalid(const char *word, int index)
+// {
+//     printf(" the word: \"%s\"\n", word);
+//     printf("    ");
+//     int i;
+//     for (i = 0; i < index; i++)
+//     {
+//         printf(" ");
+//     }
+//     printf("^\n");
+// }
+
+// // Puts a words into the trie table
+// int trieAdd(struct trie_node *node, const char *word, char *description)
+// {
+//     int i;
+//     for (i = 0; i < strlen(word); i++)
+//     {
+//         int letter = letterInt(word[i]);
+//         if (letter == -1)
+//         {
+//             // If the character in the string is invalid
+//             printf("The word was not inserted into the trie because it was invalid \n");
+//             printInvalid(word, i);
+//             printf(" description: \"%s\"\n", description);
+//             return false;
+//         }
+//         // Setting up Trie table (node is parent, letter is children)
+//         struct trie_node *parent = node;
+//         node = node->children[letter];
+
+//         if (!node)
+//         {
+//             node = malloc(sizeof(struct trie_node));
+//             parent->children[letter] = node;
+//         }
+//     }
+
+//     // Allocating memory to each character, not word (saves memory)
+//     int len = strlen(description);
+//     node->value = malloc(len +1);
+//     strncpy(node->value, description, len);
+//     return true;
+// }
+
+// // Moving through Trie Table from node (root) and finds string of word description based on letters (children)
+// char *trie_get(struct trie_node *node, const char *word)
+// {
+//     int i;
+//     for (i = 0; i < strlen(word); i++)
+//     {
+//         int letter = letterInt(word[i]);
+//         if (letter == -1)
+//         {
+//             return false; // word found
+//         }
+
+//         node = node->children[letter];
+//         if(!node)
+//         {
+//             return false; // word not found
+//         }
+//     }
+//     return node->value;
+// }
+
+// void dictionaryInit()
+// {
+//     tree = (struct trie) {}; // erases the tree
+// }
+
+// int dictionaryRead(const char * filename)
+// {
+//     // Opens the file
+//     FILE *file = fopen(filename, "r");
+
+//     if(!file)
+//     {
+//         printf("could not find or open the file! \"%s\"\n", filename);
+//         return false;
+//     }
+
+//     char word[MAX_WORD_SIZE];
+//     char desc[MAX_DESC_SIZE];
+
+//     int count = 0;
+
+//     // word and descriton are parsed
+//     while (fscanf(file, "%s %[^\n]", word, desc) > 1)
+//     {
+//         if (!trieAdd(&tree.root, word, desc))
+//         {
+//             fclose(file);
+//             return false;
+
+//         }
+//         else
+//         {
+//             count++;
+//         }
+//     }
+//     fclose(file);
+//     printf("parsed file \"%s\" with %i entries\n", filename, count);
+//     return true;
+// }
+
+// int dictionaryLook(const char *word, char *definition)
+// {
+//     // Check for invalid letters
+//     int i;
+//     for(i = 0; i < strlen(word); i++)
+//     {
+//         int letter = letterInt(word[i]);
+//         if(letter == -1)
+//         {
+//             printf("Invalid spelling!\n");
+//             printInvalid(word, i);
+//             return false;
+//         }
+//     }
+
+//     // take the string description/definition from trie table
+//     char *description = trie_get(&tree.root, word);
+
+//     if (!description)
+//     {
+//         return false;
+//     }
+
+//     // Copy the definition
+//     strcpy(definition, description);
+
+//     return true;
+// }
+
+
+// /********* Original Structure ********/
+// // Implements a dictionary's functionality
+
+// #include <stdbool.h>
+// #include <ctype.h>
+// #include <stdio.h>
+// #include <cs50.h>
+// #include <strings.h>
+// #include <string.h>
+
+// #include "dictionary.h"
+
+// // Returns true if word is in dictionary else false
+// bool check(const char *word)
+// {
+//     // TODO
+//     return false;
+// }
+
+// // Loads dictionary into memory, returning true if successful else false
+// bool load(const char *dictionary)
+// {
+//     // TODO
+//     return false;
+// }
+
+// // Returns number of words in dictionary if loaded else 0 if not yet loaded
+// unsigned int size(void)
+// {
+//     // TODO
+//     return 0;
+// }
+
+// // Unloads dictionary from memory, returning true if successful else false
+// bool unload(void)
+// {
+//     // TODO
+//     return false;
+// }
+
+
+#include <stdbool.h>
+#include <ctype.h>
 #include <stdio.h>
+#include <cs50.h>
+#include <strings.h>
 #include <string.h>
-//#include <ctype.h>
-#include <stdlib.h>
+
 
 #include "dictionary.h"
 
-#define ALPHABET_SIZE 26 //26 lowercase and 26 uppercase letters
-
-// Parameters
-#define false 0
-#define true 1
-
-struct trie tree;
-
-struct trie_node
+// define a node
+typedef struct node
 {
-    char *value;
-    struct trie_node *children[ALPHABET_SIZE * 2]; // 2= 1 set of 26 uppercase, 1 set of 26 lowercase
-};
-
-struct trie
-{
-    struct trie_node root;
-};
-
-// Change a character to an integer (a-z =  0 - 25 || A-Z = 26 - 51)
-int letterInt(char letter)
-{
-    if (letter >= 'A' && letter <= 'Z')
-    {
-        return letter - 'A' + 26;  // 26-51
-    }
-    else if (letter >= 'a' && letter <= 'z')
-    {
-        return letter - 'a'; // 0-25
-    }
-    return -1; // keep going
+    char word[LENGTH + 1];
+    struct node *next;
 }
+node;
 
-// Defines an invalid character within a word (based on its index)
-void printInvalid(const char *word, int index)
+// initialize and name variables
+node *head = NULL;
+node *hashtable[1000];
+int hashtable_size = 1000;
+int wordcount;
+
+// define a hash function
+int hash_function(const char* key)
 {
-    printf(" the word: \"%s\"\n", word);
-    printf("    ");
-    int i;
-    for (i = 0; i < index; i++)
-    {
-        printf(" ");
-    }
-    printf("^\n");
-}
+    int index = 0;
 
-// Puts a words into the trie table
-int trieAdd(struct trie_node *node, const char *word, char *description)
-{
-    int i;
-    for (i = 0; i < strlen(word); i++)
+    // traverse through the whole word of the word to be hashed
+    for(int i = 0; key[i] != '\0'; i++)
     {
-        int letter = letterInt(word[i]);
-        if (letter == -1)
-        {
-            // If the character in the string is invalid
-            printf("The word was not inserted into the trie because it was invalid \n");
-            printInvalid(word, i);
-            printf(" description: \"%s\"\n", description);
-            return false;
-        }
-        // Setting up Trie table (node is parent, letter is children)
-        struct trie_node *parent = node;
-        node = node->children[letter];
-
-        if (!node)
-        {
-            node = malloc(sizeof(struct trie_node));
-            parent->children[letter] = node;
-        }
+        // add up the index per char of the word
+        index += toupper(key[i]);
     }
 
-    // Allocating memory to each character, not word (saves memory)
-    int len = strlen(description);
-    node->value = malloc(len +1);
-    strncpy(node->value, description, len);
-    return true;
+    // modulo the index with the hashtable_size to ensure accuracy
+    // and limit the index within the size
+    return index % hashtable_size;
 }
 
-// Moving through Trie Table from node (root) and finds string of word description based on letters (children)
-char *trie_get(struct trie_node *node, const char *word)
+
+
+
+/**
+ * Returns true if word is in dictionary else false.
+ */
+bool check(const char *word)
 {
-    int i;
-    for (i = 0; i < strlen(word); i++)
+    // TODO
+
+    // an int variable to contain the index of the hashed word to be checked
+    int hash = hash_function(word);
+
+    // match the index of the word to be checked if there is an existing
+    // index of it in the hash table
+    if(hashtable[hash] == NULL)
     {
-        int letter = letterInt(word[i]);
-        if (letter == -1)
-        {
-            return false; // word found
-        }
-
-        node = node->children[letter];
-        if(!node)
-        {
-            return false; // word not found
-        }
-    }
-    return node->value;
-}
-
-void dictionaryInit()
-{
-    tree = (struct trie) {}; // erases the tree
-}
-
-int dictionaryRead(const char * filename)
-{
-    // Opens the file
-    FILE *file = fopen(filename, "r");
-
-    if(!file)
-    {
-        printf("could not find or open the file! \"%s\"\n", filename);
+        // return false if the index of the word to be checked didn't match
+        // with any existing index that has a word on it in hash table
         return false;
     }
 
-    char word[MAX_WORD_SIZE];
-    char desc[MAX_DESC_SIZE];
-
-    int count = 0;
-
-    // word and descriton are parsed
-    while (fscanf(file, "%s %[^\n]", word, desc) > 1)
+    // if it matched, proceed to checking
+    else if(hashtable[hash] != NULL)
     {
-        if (!trieAdd(&tree.root, word, desc))
-        {
-            fclose(file);
-            return false;
 
+        // initialized a temp node in order to traverse through the linked-list
+        node *cursor = hashtable[hash];
+
+        // check if the current node is not empty
+        while(cursor != NULL)
+        {
+
+            // compare string per string using strcasecmp
+            int i;
+            i = strcasecmp(cursor->word, word);
+            if(i == 0)
+            {
+                return true;
+            }
+            else
+            {
+                cursor = cursor->next;
+            }
+        }
+    }
+    return false;
+}
+
+
+/**
+ * Loads dictionary into memory. Returns true if successful else false.
+ */
+bool load(const char *dictionary)
+{
+    // TODO
+
+    // open dictionary file and check if it exist
+    FILE *fp = fopen(dictionary, "r");
+    if(fp == NULL)
+    {
+        return false;
+    }
+
+    // initialize words from dictionary to be temporarily written
+    char word[LENGTH + 1];
+
+    // initialize wordcount to 0 so it can be incremented later
+    wordcount = 0;
+
+    // look and scan for words in dictionary until the end of file
+    while(fscanf(fp, "%s", word) != EOF)
+    {
+
+        // allocate memory to be used
+        node *new_node = malloc(sizeof(node));
+
+        // initialize the memories allocated to NULL while it wasn't used
+        memset(new_node, 0, sizeof(node));
+
+        // if the new_node wasn't properly allocated with memory, unload
+        if(new_node == NULL)
+        {
+            unload();
+            return false;
+        }
+
+        // increment wordcount everytime a word is found
+        wordcount++;
+
+        // copy the word found to word pointer of node
+        strcpy(new_node->word, word);
+
+        // hash the word copied so it can be indexed on the hash table
+        int hashed = hash_function(word);
+
+        // check if the index of the hashtable has contents
+        if(hashtable[hashed] == NULL)
+        {
+
+            // if there's no content, initialized the new node as the head
+            hashtable[hashed] = new_node;
+            head = new_node;
         }
         else
         {
-            count++;
+
+            // if there's content, rewire the new node to be the head and start
+            new_node->next = hashtable[hashed];
+            hashtable[hashed] = new_node;
+            head = new_node;
         }
     }
-    fclose(file);
-    printf("parsed file \"%s\" with %i entries\n", filename, count);
+
+    fclose(fp);
     return true;
 }
 
-int dictionaryLook(const char *word, char *definition)
+
+/**
+ * Returns number of words in dictionary if loaded else 0 if not yet loaded.
+ */
+unsigned int size(void)
 {
-    // Check for invalid letters
-    int i;
-    for(i = 0; i < strlen(word); i++)
+    // TODO
+    // just return the wordcount implanted on the load function
+    return wordcount;;
+}
+
+
+/**
+ * Unloads dictionary from memory. Returns true if successful else false.
+ */
+bool unload(void)
+{
+    // TODO
+    // traverse through the hashtable and free its contents
+    for(int i = 0; i < hashtable_size; i++)
     {
-        int letter = letterInt(word[i]);
-        if(letter == -1)
+        if(hashtable[i] != NULL)
         {
-            printf("Invalid spelling!\n");
-            printInvalid(word, i);
-            return false;
+            node *cursor = hashtable[i];
+            while(cursor != NULL)
+            {
+                node *temp = cursor;
+                cursor = cursor->next;
+                free(temp);
+
+            }
         }
     }
 
-    // take the string description/definition from trie table
-    char *description = trie_get(&tree.root, word);
-
-    if (!description)
-    {
-        return false;
-    }
-
-    // Copy the definition
-    strcpy(definition, description);
 
     return true;
+
 }

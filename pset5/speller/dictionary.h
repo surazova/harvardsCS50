@@ -1,22 +1,53 @@
-// Declares a dictionary's functionality
+// // Declares a dictionary's functionality
+
+// #ifndef DICTIONARY_H
+// #define DICTIONARY_H
+
+// #define MAX_WORD_SIZE   40
+// #define MAX_DESC_SIZE  200
+
+// void dictionaryInit();
+
+// int dictionaryRead(const char * filename);
+
+// int dictionaryLook(const char * word, char * meaning);
+
+// // // Prototypes
+// // bool check(const char *word);
+// // bool load(const char *dictionary);
+// // unsigned int size(void);
+// // bool unload(void);
+
+
+// #endif
 
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 
-#define MAX_WORD_SIZE   40
-#define MAX_DESC_SIZE  200
+#include <stdbool.h>
 
-void dictionaryInit();
+// maximum length for a word
+// (e.g., pneumonoultramicroscopicsilicovolcanoconiosis)
+#define LENGTH 45
 
-int dictionaryRead(const char * filename);
+/**
+ * Returns true if word is in dictionary else false.
+ */
+bool check(const char *word);
 
-int dictionaryLook(const char * word, char * meaning);
+/**
+ * Loads dictionary into memory. Returns true if successful else false.
+ */
+bool load(const char *dictionary);
 
-// // Prototypes
-// bool check(const char *word);
-// bool load(const char *dictionary);
-// unsigned int size(void);
-// bool unload(void);
+/**
+ * Returns number of words in dictionary if loaded else 0 if not yet loaded.
+ */
+unsigned int size(void);
 
+/**
+ * Unloads dictionary from memory.  Returns true if successful else false.
+ */
+bool unload(void);
 
-#endif
+#endif // DICTIONARY_H
