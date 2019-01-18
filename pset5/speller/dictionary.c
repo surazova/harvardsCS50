@@ -45,7 +45,45 @@ bool check(const char *word)
     }
 
     // Next case: if true, then word is in the dictionary
+    if (mov -> word_exists)
+        return true;
 
+    return false;
+}
+
+/**** ADDING DICTIONARY TO MEMORY ****/
+bool load(const char *dictionary)
+{
+    // open, read mode
+    FILE *dict = fopen(dictionary, "r");
+
+    if (dict == NULL)
+    {
+        printf("Sorry, dictionary could not be opened\n");
+
+        return false;
+    }
+
+    // Keeps index for current user
+    int position = 0;
+    char letter;
+
+    root = null_node(mov);
+    mov = root;
+
+    // Load every word from dictionary
+    while(true)
+    {
+        letter = fgetc(dict);
+
+        position = alpha_index(letter);
+
+        if (letter != '\n')
+        {
+            // end of file
+            if (feof(dict))
+        }
+    }
 }
 
 // initialize and name variables
