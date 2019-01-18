@@ -160,3 +160,32 @@ void free_node(node *move)
     }
     free(move);
 }
+
+/****** LETTER POSITIONS ******/
+int alpha_index(char letter)
+{
+    if (letter >= 'a' && ch <= 'z')
+        return letter - 'a';
+    else if (letter >= 'A' && letter <= 'Z')
+        return letter - 'A';
+    else
+        return 26;
+}
+
+
+node *null_node(node *node_pointer)
+{
+    node_pointer = malloc(sizeof(node));
+    // If the pointer is NULL, return NULL
+    if (node_pointer == NULL)
+        return NULL;
+
+    // children node = null
+    for (int i = 0; i < 27; i++)
+        node_pointer -> children[i] = NULL;
+
+    node_pointer -> word_exists = false;
+
+    // Return the node
+    return node_pointer;
+}
