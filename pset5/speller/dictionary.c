@@ -8,19 +8,45 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <cs50.h>
-#include <strings.h>
 #include <string.h>
-
+#include <stdlib.h>
 
 #include "dictionary.h"
 
-// define a node
-typedef struct node
+unsigned int words_total = 0;
+
+// True: word is in the dictionary
+// False: word is not in the dictionary
+bool check(const char *word)
 {
-    char word[LENGTH + 1];
-    struct node *next;
+    int position = 0;
+    int incorrect_words = 0;
+    // set pointer to the node
+    mov = root;
+
+    // char = letter
+    for (int i = 0; i < strlen(word); i++)
+    {
+        // find the position of each letter
+        position = alpha_index(word[i]);
+
+        if (mov -> children[position] == NULL)
+        {
+            incorrect_words++;
+
+            // exit
+            return false;
+        }
+        else
+        {
+            // Next letter
+            mov = mov -> children[position];
+        }
+    }
+
+    // Next case: if true, then word is in the dictionary
+
 }
-node;
 
 // initialize and name variables
 node *head = NULL;

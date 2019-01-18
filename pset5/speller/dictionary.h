@@ -38,4 +38,4 @@ node;
 int alpha_indx(char);
 node *null_node(node *);
 mpde *root;
-node *trav;
+node *mov;
