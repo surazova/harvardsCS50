@@ -30,12 +30,15 @@ bool unload(void);
 
 typedef struct node
 {
-    bool is_word;
+    bool word_exists;
     struct node *children[27];
 }
 node;
 
-int alpha_indx(char);
+void free_node(node *move);
+
+int alpha_index(char);
 node *null_node(node *);
-mpde *root;
+node *root;
 node *mov;
+

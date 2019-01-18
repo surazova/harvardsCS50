@@ -7,13 +7,12 @@
 #include <stdbool.h>
 #include <ctype.h>
 #include <stdio.h>
-#include <cs50.h>
 #include <string.h>
 #include <stdlib.h>
 
 #include "dictionary.h"
 
-unsigned int words_total = 0;
+unsigned int total_words = 0;
 
 // True: word is in the dictionary
 // False: word is not in the dictionary
@@ -96,7 +95,7 @@ bool load(const char *dictionary)
                 if (mov -> children[position] == NULL)
                 {
                     // Move to a new node
-                    mov -> children[position] == null_node(mov -> children[position]);
+                    mov -> children[position] = null_node(mov -> children[position]);
                 }
 
                 // moving mov to next node
@@ -106,9 +105,9 @@ bool load(const char *dictionary)
 
         else
         {
-            trav -> word_exists = true;
+            mov -> word_exists = true;
 
-            all_words++;
+            total_words++;
 
             // come back to root node
             mov = root;
@@ -164,7 +163,7 @@ void free_node(node *move)
 /****** LETTER POSITIONS ******/
 int alpha_index(char letter)
 {
-    if (letter >= 'a' && ch <= 'z')
+    if (letter >= 'a' && letter <= 'z')
         return letter - 'a';
     else if (letter >= 'A' && letter <= 'Z')
         return letter - 'A';
@@ -189,3 +188,18 @@ node *null_node(node *node_pointer)
     // Return the node
     return node_pointer;
 }
+
+
+/****** TESTING ******/
+// To make: make speller
+// To clear: make clean
+// Implementation: ./speller texts/lalaland.txt
+
+// WORDS MISSPELLED:     955
+// WORDS IN DICTIONARY:  143091
+// WORDS IN TEXT:        17756
+// TIME IN load:         0.18
+// TIME IN check:        0.02
+// TIME IN size:         0.00
+// TIME IN unload:       0.12
+// TIME IN TOTAL:        0.32
