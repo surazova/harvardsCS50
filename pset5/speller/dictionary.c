@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
 #include "dictionary.h"
 
 unsigned int total_words = 0;
